@@ -1,0 +1,19 @@
+Policy Number: POL12345
+Policyholder Name: Raj Sharma
+Effective Dates: Jan 2026 - Jan 2027
+
+Incident Date: 10 May 2026
+Time: 3 PM
+Location: Bangalore
+
+Description:
+Minor rear-end collision in traffic.
+
+Claimant: Raj Sharma
+Asset Type: Car
+Asset ID: CAR9981
+
+Estimated Damage: 18000
+Claim Type: Auto
+Attachments: photos.pdf
+Initial Estimate: 18000

@@ -1,0 +1,17 @@
+Policy Number: POL99999
+Policyholder Name: Priya Nair
+
+Incident Date: 12 May 2026
+Time: 5 PM
+Location: Chennai
+
+Description:
+Customer suffered injury during accident.
+
+Claimant: Priya Nair
+Asset Type: Bike
+Estimated Damage: 40000
+
+Claim Type: Injury
+Attachments: medical.pdf
+Initial Estimate: 40000

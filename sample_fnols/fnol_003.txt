@@ -1,0 +1,17 @@
+Policy Number: POL88888
+Policyholder Name: Arjun Rao
+
+Incident Date: 11 May 2026
+Time: 10 PM
+Location: Hyderabad
+
+Description:
+Possible staged collision with inconsistent witness reports.
+
+Claimant: Arjun Rao
+Asset Type: Car
+Estimated Damage: 70000
+
+Claim Type: Auto
+Attachments: report.pdf
+Initial Estimate: 70000

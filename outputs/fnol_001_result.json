@@ -1,0 +1,28 @@
+{
+  "extractedFields": {
+    "policy_number": "POL12345",
+    "policyholder_name": "Raj Sharma",
+    "policy_effective_date": "Jan 2026",
+    "policy_expiry_date": "Jan 2027",
+    "incident_date": "10 May 2026",
+    "incident_time": "3 PM",
+    "incident_location": "Bangalore",
+    "incident_description": "Minor rear-end collision in traffic.",
+    "claimant_name": "Raj Sharma",
+    "third_party": null,
+    "contact_details": null,
+    "asset_type": "Car",
+    "asset_id": "CAR9981",
+    "estimated_damage": 18000,
+    "claim_type": "Auto",
+    "attachments": [
+      "photos.pdf"
+    ],
+    "initial_estimate": 18000
+  },
+  "missingFields": [
+    "contact_details"
+  ],
+  "recommendedRoute": "Manual Review",
+  "reasoning": "The following mandatory fields are missing or blank: ['contact_details']. A human agent must complete the record before processing."
+}

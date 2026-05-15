@@ -1,0 +1,29 @@
+{
+  "extractedFields": {
+    "policy_number": "POL88888",
+    "policyholder_name": "Arjun Rao",
+    "policy_effective_date": null,
+    "policy_expiry_date": null,
+    "incident_date": "11 May 2026",
+    "incident_time": "10 PM",
+    "incident_location": "Hyderabad",
+    "incident_description": "Possible staged collision with inconsistent witness reports.",
+    "claimant_name": "Arjun Rao",
+    "third_party": null,
+    "contact_details": null,
+    "asset_type": "Car",
+    "asset_id": null,
+    "estimated_damage": 70000,
+    "claim_type": "Auto",
+    "attachments": [
+      "report.pdf"
+    ],
+    "initial_estimate": 70000
+  },
+  "missingFields": [
+    "policy_effective_date",
+    "contact_details"
+  ],
+  "recommendedRoute": "Investigation Flag",
+  "reasoning": "Description contains suspicious keyword(s): ['inconsistent', 'staged']. Routed for investigation."
+}

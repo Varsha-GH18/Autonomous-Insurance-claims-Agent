@@ -1,0 +1,29 @@
+{
+  "extractedFields": {
+    "policy_number": "POL99999",
+    "policyholder_name": "Priya Nair",
+    "policy_effective_date": null,
+    "policy_expiry_date": null,
+    "incident_date": "12 May 2026",
+    "incident_time": "5 PM",
+    "incident_location": "Chennai",
+    "incident_description": "Customer suffered injury during accident.",
+    "claimant_name": "Priya Nair",
+    "third_party": null,
+    "contact_details": null,
+    "asset_type": "Bike",
+    "asset_id": null,
+    "estimated_damage": 40000,
+    "claim_type": "Injury",
+    "attachments": [
+      "medical.pdf"
+    ],
+    "initial_estimate": 40000
+  },
+  "missingFields": [
+    "policy_effective_date",
+    "contact_details"
+  ],
+  "recommendedRoute": "Specialist Queue",
+  "reasoning": "Claim type is 'Injury'. Requires specialist medical assessment team."
+}
