@@ -361,7 +361,7 @@ Each FNOL produces a JSON file in `outputs/`. Below are the actual outputs for a
 
 ---
 
-## 📄 License
 
-MIT License — free to use, modify, and distribute.
+
+
 
