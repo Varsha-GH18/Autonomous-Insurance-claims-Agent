@@ -1,6 +1,3 @@
-# Autonomous-Insurance-claims-Agent
-Autonomous FNOL Claims Processing Agent that uses Groq's free Llama 3.1 LLM to extract structured fields from insurance documents, detect missing data, and intelligently route claims to Fast-track, Specialist Queue, Manual Review, or Investigation Flag workflows. Built with Python.
- Autonomous Insurance Claims Processing Agent
 # 🛡️ FNOL-ClaimSense-AI
 
 > Autonomous Insurance Claims Processing Agent powered by Groq's free Llama 3.1 LLM — extracts structured fields from FNOL documents, detects missing data, and intelligently routes claims to the correct workflow.
@@ -19,14 +16,14 @@ Autonomous FNOL Claims Processing Agent that uses Groq's free Llama 3.1 LLM to e
 8. [Configuration](#configuration)
 9. [Running the Agent](#running-the-agent)
 10. [Output Format](#output-format)
-11. [Sample Scenarios](#sample-scenarios)
+11. [Sample FNOL Documents](#sample-fnol-documents)
 12. [Technologies Used](#technologies-used)
 
 ---
 
 ## 📌 Overview
 
-FNOL-ClaimSense-AI is a lightweight autonomous agent that processes **First Notice of Loss (FNOL)** insurance documents. It reads raw FNOL text, uses an AI model to extract key fields, checks for missing or inconsistent data, and automatically routes the claim to the correct processing workflow — all without manual intervention.
+FNOL-ClaimSense-AI is a lightweight autonomous agent that processes **First Notice of Loss (FNOL)** insurance documents. It reads raw FNOL text files, uses an AI model to extract key fields, checks for missing or inconsistent data, and automatically routes each claim to the correct processing workflow — without any manual intervention.
 
 ---
 
@@ -37,7 +34,7 @@ FNOL-ClaimSense-AI is a lightweight autonomous agent that processes **First Noti
 - 🚦 Rule-based intelligent claim routing (5 route types)
 - 🚩 Fraud / investigation flag detection via keyword scanning
 - 📄 Structured JSON output per FNOL document
-- ⚡ Fast, lightweight — no paid API required
+- ⚡ Fast and lightweight — no paid API required
 
 ---
 
@@ -49,11 +46,9 @@ FNOL-ClaimSense-AI/
 ├── agent.py                  # Main agent — extraction, validation, routing
 │
 ├── sample_fnols/             # Sample FNOL input documents
-│   ├── fnol_001.txt          # Auto damage         → Fast-track
-│   ├── fnol_002.txt          # Personal injury      → Specialist Queue
-│   ├── fnol_003.txt          # Fraud signals        → Investigation Flag
-│   ├── fnol_004.txt          # Missing fields       → Manual Review
-│   └── fnol_005.txt          # Theft                → Fast-track
+│   ├── fnol_001.txt          # Auto damage (Raj Sharma)    → Fast-track
+│   ├── fnol_002.txt          # Injury claim (Priya Nair)   → Specialist Queue
+│   └── fnol_003.txt          # Fraud signals (Arjun Rao)   → Investigation Flag
 │
 ├── outputs/                  # Auto-created — one JSON result per FNOL
 │
@@ -122,14 +117,14 @@ Before you begin, make sure you have the following:
 
 - **Python 3.9 or higher** installed
 - **pip** (Python package manager)
-- A **free Groq API key** — get one at [console.groq.com](https://console.groq.com) (no credit card required)
+- A **free Groq API key** — sign up at [console.groq.com](https://console.groq.com) (no credit card needed)
 - **Git** installed on your machine
 
 ---
 
 ## 🔧 Installation
 
-Follow these steps exactly:
+Follow these steps one by one:
 
 **Step 1 — Clone the repository**
 ```bash
@@ -190,9 +185,9 @@ $env:GROQ_API_KEY="gsk_your_key_here"
 python agent.py
 ```
 
-**Step 8 — Watch the console output**
+**Step 8 — Watch the live console output**
 
-You will see live progress for each file:
+The agent processes each file and prints progress:
 ```
 =======================================================
   Processing: fnol_001.txt
@@ -204,11 +199,31 @@ You will see live progress for each file:
          Route -> Fast-track
   [4/4] Building output...
   Saved -> outputs/fnol_001_result.json
+
+=======================================================
+  Processing: fnol_002.txt
+=======================================================
+  [1/4] Extracting fields via Groq (free)...
+  [2/4] Checking for missing fields...
+         Missing: ['policy_effective_date', 'contact_details', 'asset_id']
+  [3/4] Routing claim...
+         Route -> Specialist Queue
+  [4/4] Building output...
+  Saved -> outputs/fnol_002_result.json
+
+=======================================================
+  Processing: fnol_003.txt
+=======================================================
+  [1/4] Extracting fields via Groq (free)...
+  [2/4] Checking for missing fields...
+         Missing: ['policy_effective_date', 'contact_details', 'asset_id']
+  [3/4] Routing claim...
+         Route -> Investigation Flag
+  [4/4] Building output...
+  Saved -> outputs/fnol_003_result.json
 ```
 
-**Step 9 — View the summary table**
-
-At the end, a summary is printed:
+**Step 9 — View the final summary**
 ```
 =======================================================
   PROCESSING SUMMARY
@@ -216,12 +231,10 @@ At the end, a summary is printed:
   fnol_001.txt         -> Fast-track
   fnol_002.txt         -> Specialist Queue
   fnol_003.txt         -> Investigation Flag
-  fnol_004.txt         -> Manual Review
-  fnol_005.txt         -> Fast-track
 =======================================================
 ```
 
-**Step 10 — Open any output file to inspect results**
+**Step 10 — Inspect any output JSON file**
 ```bash
 cat outputs/fnol_001_result.json
 ```
@@ -230,46 +243,110 @@ cat outputs/fnol_001_result.json
 
 ## 📤 Output Format
 
-Each FNOL produces a JSON file in `outputs/` with this structure:
+Each FNOL produces a JSON file in `outputs/`. Below are the actual outputs for all 3 sample documents.
+
+---
+
+### fnol_001_result.json — Raj Sharma
 
 ```json
 {
   "extractedFields": {
-    "policy_number": "POL-2024-78432",
-    "policyholder_name": "Rajesh Kumar",
-    "policy_effective_date": "2024-01-01",
-    "policy_expiry_date": "2025-01-01",
-    "incident_date": "2024-11-14",
-    "incident_time": "08:35 AM",
-    "incident_location": "MG Road, Bangalore, Karnataka",
-    "incident_description": "Vehicle rear-ended at a traffic signal...",
-    "claimant_name": "Rajesh Kumar",
-    "third_party": "Suresh Mehta",
-    "contact_details": "+91-9123456780",
-    "asset_type": "Motor Vehicle",
-    "asset_id": "KA-01-MF-4521",
+    "policy_number": "POL12345",
+    "policyholder_name": "Raj Sharma",
+    "policy_effective_date": "Jan 2026 - Jan 2027",
+    "policy_expiry_date": "Jan 2027",
+    "incident_date": "10 May 2026",
+    "incident_time": "3 PM",
+    "incident_location": "Bangalore",
+    "incident_description": "Minor rear-end collision in traffic.",
+    "claimant_name": "Raj Sharma",
+    "third_party": null,
+    "contact_details": null,
+    "asset_type": "Car",
+    "asset_id": "CAR9981",
     "estimated_damage": 18000,
-    "claim_type": "Property Damage",
-    "attachments": "Photos of damage, Police FIR copy",
+    "claim_type": "Auto",
+    "attachments": "photos.pdf",
     "initial_estimate": 18000
   },
-  "missingFields": [],
+  "missingFields": ["contact_details"],
   "recommendedRoute": "Fast-track",
-  "reasoning": "Estimated damage (18,000) is below the 25,000 threshold and all mandatory fields are present. Eligible for fast-track."
+  "reasoning": "Estimated damage (18,000) is below the 25,000 threshold and all core mandatory fields are present. Eligible for fast-track processing."
 }
 ```
 
 ---
 
-## 🧪 Sample Scenarios
+### fnol_002_result.json — Priya Nair
 
-| File | Scenario | Damage | Expected Route |
-|------|----------|--------|----------------|
-| `fnol_001.txt` | Rear-end motor accident | INR 18,000 | ⚡ Fast-track |
-| `fnol_002.txt` | Slip-and-fall personal injury | INR 45,000 | 👨‍⚕️ Specialist Queue |
-| `fnol_003.txt` | Suspicious collision (fraud keywords) | INR 95,000 | 🚩 Investigation Flag |
-| `fnol_004.txt` | Kitchen fire — 4 fields missing | INR 62,000 | 📋 Manual Review |
-| `fnol_005.txt` | Laptop theft | INR 22,500 | ⚡ Fast-track |
+```json
+{
+  "extractedFields": {
+    "policy_number": "POL99999",
+    "policyholder_name": "Priya Nair",
+    "policy_effective_date": null,
+    "policy_expiry_date": null,
+    "incident_date": "12 May 2026",
+    "incident_time": "5 PM",
+    "incident_location": "Chennai",
+    "incident_description": "Customer suffered injury during accident.",
+    "claimant_name": "Priya Nair",
+    "third_party": null,
+    "contact_details": null,
+    "asset_type": "Bike",
+    "asset_id": null,
+    "estimated_damage": 40000,
+    "claim_type": "Injury",
+    "attachments": "medical.pdf",
+    "initial_estimate": 40000
+  },
+  "missingFields": ["policy_effective_date", "contact_details", "asset_id"],
+  "recommendedRoute": "Specialist Queue",
+  "reasoning": "Claim type is Injury. Routed to the specialist medical assessment team regardless of missing fields."
+}
+```
+
+---
+
+### fnol_003_result.json — Arjun Rao
+
+```json
+{
+  "extractedFields": {
+    "policy_number": "POL88888",
+    "policyholder_name": "Arjun Rao",
+    "policy_effective_date": null,
+    "policy_expiry_date": null,
+    "incident_date": "11 May 2026",
+    "incident_time": "10 PM",
+    "incident_location": "Hyderabad",
+    "incident_description": "Possible staged collision with inconsistent witness reports.",
+    "claimant_name": "Arjun Rao",
+    "third_party": null,
+    "contact_details": null,
+    "asset_type": "Car",
+    "asset_id": null,
+    "estimated_damage": 70000,
+    "claim_type": "Auto",
+    "attachments": "report.pdf",
+    "initial_estimate": 70000
+  },
+  "missingFields": ["policy_effective_date", "contact_details", "asset_id"],
+  "recommendedRoute": "Investigation Flag",
+  "reasoning": "Description contains suspicious keywords: staged, inconsistent. This claim has been flagged for fraud investigation before any further processing."
+}
+```
+
+---
+
+## 🧪 Sample FNOL Documents
+
+| File | Policyholder | Location | Claim Type | Damage | Missing Fields | Route |
+|------|-------------|----------|------------|--------|----------------|-------|
+| `fnol_001.txt` | Raj Sharma | Bangalore | Auto — rear-end collision | INR 18,000 | contact_details | ⚡ Fast-track |
+| `fnol_002.txt` | Priya Nair | Chennai | Injury — accident | INR 40,000 | effective_date, contact, asset_id | 👨‍⚕️ Specialist Queue |
+| `fnol_003.txt` | Arjun Rao | Hyderabad | Auto — staged collision | INR 70,000 | effective_date, contact, asset_id | 🚩 Investigation Flag |
 
 ---
 
@@ -287,3 +364,4 @@ Each FNOL produces a JSON file in `outputs/` with this structure:
 ## 📄 License
 
 MIT License — free to use, modify, and distribute.
+
