@@ -175,7 +175,7 @@ On Windows (PowerShell):
 $env:GROQ_API_KEY="gsk_your_key_here"
 ```
 
-> ⚠️ Never hardcode your API key in the source code or commit it to GitHub.
+
 
 ---
 
