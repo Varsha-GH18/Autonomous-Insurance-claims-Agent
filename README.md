@@ -162,7 +162,8 @@ pip install -r requirements.txt
 
 ## ⚙️ Configuration
 
-**Step 6 — Set your Groq API key as an environment variable**
+Step 6 — Get your free Groq API key
+Visit  https://console.groq.com/keys to generate your key, then set it as an environment variable:
 
 On macOS / Linux:
 ```bash
