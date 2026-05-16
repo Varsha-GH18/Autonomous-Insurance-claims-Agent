@@ -164,7 +164,7 @@ pip install -r requirements.txt
 
 Step 6 — Get your free Groq API key
 Visit  https://console.groq.com/keys to generate your key, create api keys,then set it as an environment variable:
-assign copied api keys to environment variable 
+
 
 On macOS / Linux:
 ```bash
@@ -179,7 +179,7 @@ $env:GROQ_API_KEY="gsk_your_key_here"
 
 
 ---
-
+assign copied api keys to environment variable 
 ## ▶️ Running the Agent
 
 **Step 7 — Run the agent**
