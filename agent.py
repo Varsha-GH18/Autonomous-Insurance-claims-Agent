@@ -11,7 +11,7 @@ import re
 from pathlib import Path
 from groq import Groq
 
-# ── Groq client (FREE) ────────────────────────────────────────────────────────
+# ── Groq client ────────────────────────────────────────────────────────
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 MODEL = "llama-3.1-8b-instant"
 
@@ -20,13 +20,13 @@ FRAUD_KEYWORDS = ["fraud", "inconsistent", "staged", "suspicious", "fabricated"]
 FAST_TRACK_LIMIT = 25000
 
 
-# ── Step 1: Read FNOL document ────────────────────────────────────────────────
+# ── Read FNOL document ────────────────────────────────────────────────
 def read_fnol(file_path: str) -> str:
     with open(file_path, "r", encoding="utf-8") as f:
         return f.read()
 
 
-# ── Step 2: Extract fields via Groq ──────────────────────────────────────────
+# ── Extract fields via Groq ──────────────────────────────────────────
 def extract_fields(raw_text: str) -> dict:
     prompt = f"""
 You are an insurance claims extraction assistant.
@@ -70,7 +70,7 @@ FNOL Document:
     return json.loads(raw)
 
 
-# ── Step 3: Identify missing fields ───────────────────────────────────────────
+# ── Identify missing fields ───────────────────────────────────────────
 MANDATORY_FIELDS = [
     "policy_number", "policyholder_name", "policy_effective_date",
     "incident_date", "incident_time", "incident_location",
@@ -82,7 +82,7 @@ def find_missing(fields: dict) -> list:
     return [f for f in MANDATORY_FIELDS if not fields.get(f)]
 
 
-# ── Step 4: Route the claim ───────────────────────────────────────────────────
+# ──  Route the claim ───────────────────────────────────────────────────
 def route_claim(fields: dict, missing: list) -> tuple:
     description = (fields.get("incident_description") or "").lower()
     claim_type  = (fields.get("claim_type") or "").lower()
@@ -132,7 +132,7 @@ def route_claim(fields: dict, missing: list) -> tuple:
     )
 
 
-# ── Step 5: Build output JSON ─────────────────────────────────────────────────
+# ──  Build output JSON ─────────────────────────────────────────────────
 def build_output(fields: dict, missing: list, route: str, reasoning: str) -> dict:
     return {
         "extractedFields": fields,
